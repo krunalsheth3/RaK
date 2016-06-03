@@ -1,0 +1,177 @@
+
+<div layout="" data-ng-cloak>
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  md-is-locked-open="$mdMedia('gt-md')">
+  
+      <md-toolbar class="md-tall md-hue-2">
+             <span flex></span>
+             <div layout="column" class="md-toolbar-tools-bottom inset">
+              <div class="avatarParent">
+                <user-avatar></user-avatar>
+              </div>
+               <span></span>
+               <div>
+                  <blaze-template name="loginButtons"></blaze-template>
+              </div>
+             </div>
+      </md-toolbar>
+      <md-content layout-padding="">
+        <md-list-item ng-click="navigateToPage('/post')" md-ink-ripple>
+          <md-icon>
+             <i class="material-icons">add_a_photo</i>
+           </md-icon>
+          <p>Post Ad</p>           
+        </md-list-item>              
+        <md-subheader class="md-no-sticky">Choose</md-subheader>
+         <md-list-item ng-repeat="item in slideMenuItems" ng-click="navigateToPage(item.link)">
+           <md-icon>
+              <i class="material-icons">{{item.icon}}</i>
+            </md-icon>
+           <p>{{ item.title }}</p>           
+         </md-list-item>              
+      </md-content> 
+  </md-sidenav>
+  <div layout="column" class="relative" layout-fill role="main">
+    <md-toolbar ng-show="!showSearch">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" hide-gt-md aria-label=”Menu” data-ng-click="toggleSidenav('left')">
+          <md-icon class="md-default-theme material-icons">
+            <i class="material-icons">line_weight</i>
+          </md-icon>
+        </md-button>
+        <!-- <md-button class="md-icon-button" aria-label=”Menu” data-ng-click="toggleSidenav('left')">
+          <md-icon class="md-default-theme material-icons">
+            <i class="material-icons">line_weight</i>
+          </md-icon>
+        </md-button> -->
+        <md-button class="md-icon-button" aria-label="Icon" data-ng-click="navigateToJustPage('/')">
+          <md-icon>
+            <i class="material-icons">face</i>
+          </md-icon>
+        </md-button>
+        <h2>
+          <span>Heading</span>
+        </h2>
+        <span flex></span>
+        <div data-ng-show="displaySearchBox">
+        <md-button aria-label="Search" ng-click="showSearch = !showSearch" class="md-icon-button">
+           <md-tooltip>Search</md-tooltip>
+           <md-icon style="color:wheat">
+            <i class="material-icons">search</i>
+           </md-icon>
+        </md-button>
+      </div>
+        <md-button class="md-icon-button" aria-label="Post Ad" data-ng-click="navigateToJustPage('/post')">
+          <md-tooltip>Post Ad</md-tooltip>
+          <md-icon>
+            <i class="material-icons">add_a_photo</i>
+          </md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="User">
+          <md-tooltip>User Info</md-tooltip>
+          <md-icon>
+            <i class="material-icons">account_circle</i>
+          </md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div data-ng-show="displaySearchBox">
+      <md-toolbar class="md-hue-1" ng-show="showSearch">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+            <md-tooltip>Back</md-tooltip>
+            <md-icon>
+              <i class="material-icons">keyboard_backspace</i>
+            </md-icon>
+          </md-button>
+          <md-input-container md-theme="input" class="md-primary" flex style="margin-top:40px">
+            <label>&nbsp;</label>
+            <input id="globalSearch" type="search" ng-model="globalSearch" placeholder="Search" ng-model-options="{debounce: 1000}">
+          </md-input-container>
+        </div>
+      </md-toolbar>
+    </div>
+    <md-content flex="" md-scroll-y="" class="md-default-theme">
+      <div ui-view="">
+      </div>
+    </md-content>
+  </div>
+
+     <!-- Modal -->
+  <div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" id="loginForm" name="loginForm" data-ng-submit="submitLoginForm(currentUser)">
+            <div class="form-group">
+              <label for="userName"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="email" class="form-control" id="userName" required placeholder="Enter email" name="userName" data-ng-model="currentUser.userName">
+            </div>
+            <div class="form-group">
+              <label for="userPassword"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="password" class="form-control" id="userPassword" required placeholder="Enter password" name="userPassword" data-ng-model="currentUser.userPassword">
+              <div class="alert alert-danger" role="alert" ng-show="showErrorMessage">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                The email and password you entered don't match.
+              </div>
+
+              
+            </div>
+            <button type="submit" id="loginSubmit" name="loginSubmit" class="btn btn-primary btn-block">
+              <span class="glyphicon glyphicon-log-in"></span> Login</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Not a member? <a href="#" id="signUp" data-ng-click="showRegistrationForm()">Sign Up</a></p>
+          <p>Forgot <a href="#" id="forgotPassword">Password?</a></p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="modal fade" id="registerModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Register</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" id="loginForm" name="loginForm" data-ng-submit="submitRegistrationForm(newUser)">
+            <div class="form-group">
+              <label for="userName"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="email" class="form-control" id="userName" required placeholder="Enter email" name="userName" data-ng-model="newUser.userName">
+            </div>
+            <div class="form-group">
+              <label for="userPassword"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="password" class="form-control" id="userPassword" required placeholder="Enter password" name="userPassword" data-ng-model="newUser.userPassword">
+            </div>
+            <button type="button" data-ng-click="showLoginForm()" class="btn btn-success pull-left">
+              <span class="glyphicon glyphicon-log-in"></span> Login
+            </button>
+            <button type="submit" id="registerSubmit" name="registerSubmit" class="btn btn-primary pull-right">
+              <span class="glyphicon glyphicon-off"></span> Register 
+            </button>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>

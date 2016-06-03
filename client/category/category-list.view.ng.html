@@ -1,0 +1,23 @@
+<div class="category-list" layout="column">
+  <md-card>
+  <h2>Category</h2>
+  
+   <md-progress-circular md-mode="{{spinnerValue}}" class="ajax-loader md-warn md-hue-3"></md-progress-circular>
+    <div class="col-xs-6 col-md-4 col-lg-3" data-ng-repeat="category in categoryData">
+
+        <figure class="img-thumbnail">
+            <a class="modal-title" href="/category/{{category.type}}/{{category._id}}" title="" data-gallery="">
+              <img data-ng-src="" width="100%" height="100%" alt="" class="img-responsive">
+            <figcaption>
+                    <label data-ng-bind="list.adTitle"></label>
+                    <br>
+                    <span class="text-default">
+                      {{category.type}}
+                      
+                    </span>
+            </figcaption>
+            </a>
+        </figure>
+    </div>
+  </md-card>  
+</div>

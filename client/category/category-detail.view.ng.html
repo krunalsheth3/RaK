@@ -1,0 +1,116 @@
+<div class="category-detail" layout="column">
+  <md-card>
+   
+    <md-progress-circular md-mode="{{spinnerValue}}" class="{{spinnerClass}}"  md-diameter="{{spinnerDiameter}}">
+    </md-progress-circular>
+    <md-content layout-padding>
+        <div layout="row" class="md-whiteframe-z1">
+         <md-input-container class="md-block" flex-gt-sm>
+           <input type="search" placeholder="Search" ng-model="search" ng-model-options="{debounce: 1000}" class="form-control input-lg" />
+         </md-input-container>
+         <md-input-container>
+              <label> Sort By <span class="caret"></span> </label>
+              <md-select ng-model="defaultSortOrder">
+                <md-option value="Recently Added" data-ng-click="sortByRecentyAdded()">
+                  Recently Added
+                </md-option>
+                <md-option value="Around you" data-ng-click="sortByroundYou()">
+                  Around you
+                </md-option>
+                <md-option value="Price: Low to High" data-ng-click="sortByPrice(1)">
+                  Price: Low to High
+                </md-option>
+                <md-option value="Price: High to Low" data-ng-click="sortByPrice(-1)">
+                  Price: High to Low
+                </md-option>
+                <md-option value="Name: A-Z" data-ng-click="sortByName(1)">
+                  Name: A-Z
+                </md-option>
+                <md-option value="Name: Z-A" data-ng-click="sortByName(-1)">
+                  Name: Z-A
+                </md-option>
+              </md-select>
+          </md-input-container>
+        </div>
+      </md-content>
+      
+      <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="row">
+              
+          <div flex="25" flex-md="25" flex-sm="25" flex-xs="25" layout="column" >
+              <md-card data-ng-repeat="list in listData" data-ng-if="$index%4 == 0">
+                 <a class="modal-title" href="/list/{{list._id}}" title="" data-gallery="">
+                    <img data-ng-src="{{list.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+                     <label data-ng-bind="list.adTitle"></label>
+                      <br>
+                      <span class="text-danger">Price: 
+                        <i class="fa fa-rupee"></i> 
+                        <span data-ng-bind="list.adPrice"> </span>
+                      </span>
+                  </a>
+              </md-card>
+          </div>
+          <div flex="25" flex-md="25" flex-sm="25" flex-xs="25" layout="column" >
+              <md-card data-ng-repeat="list in listData" data-ng-if="$index%4 == 1">
+                 <a class="modal-title" href="/list/{{list._id}}" title="" data-gallery="">
+                    <img data-ng-src="{{list.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+                      <label data-ng-bind="list.adTitle"></label>
+                      <br>
+                      <span class="text-danger">Price: 
+                        <i class="fa fa-rupee"></i> 
+                        <span data-ng-bind="list.adPrice"> </span>
+                      </span>
+                  </a>
+              </md-card>
+          </div>
+           <div flex="25" flex-md="25" flex-sm="25" flex-xs="25" layout="column" >
+              <md-card data-ng-repeat="list in listData" data-ng-if="$index%4 == 2">
+                 <a class="modal-title" href="/list/{{list._id}}" title="" data-gallery="">
+                    <img data-ng-src="{{list.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+                    <label data-ng-bind="list.adTitle"></label>
+                      <br>
+                      <span class="text-danger">Price: 
+                        <i class="fa fa-rupee"></i> 
+                        <span data-ng-bind="list.adPrice"> </span>
+                      </span>
+                  </a>
+              </md-card>
+          </div>
+           <div flex="25" flex-md="25" flex-sm="25" flex-xs="25" layout="column" >
+              <md-card data-ng-repeat="list in listData" data-ng-if="$index%4 == 3">
+                 <a class="modal-title" href="/list/{{list._id}}" title="" data-gallery="">
+                    <img data-ng-src="{{list.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+                    <label data-ng-bind="list.adTitle"></label>
+                      <br>
+                      <span class="text-danger">Price: 
+                        <i class="fa fa-rupee"></i> 
+                        <span data-ng-bind="list.adPrice"> </span>
+                      </span>
+                  </a>
+              </md-card>
+          </div>
+        
+          </md-content>
+
+          <uib-pagination boundary-links="true" total-items="listCount.count" ng-model="page" class="pagination-sm" ng-change="pageChanged(page)" items-per-page="perPage" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>              
+          
+    
+        <p>Total number of things: {{listCount.count}}</p>
+  </md-card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<div class="main" layout="column">
+   <md-card>
+    <md-progress-circular md-mode="{{spinnerValue}}" class="{{spinnerClass}}"  md-diameter="{{spinnerDiameter}}"></md-progress-circular>
+      
+    <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="row">
+
+
+
+    <div class="masonry" infinite-scroll='loadMore()' infinite-scroll-distance="{{scrollDist}}">
+        <div class="masonaryItem" data-ng-repeat="list in mainListData">
+         
+           <a class="modal-title" href="/list/{{list._id}}" title="" data-gallery="">
+              <img data-ng-src="{{list.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+               <label data-ng-bind="list.adTitle"></label>
+                <br>
+                <span class="text-danger">Price: 
+                  <i class="fa fa-rupee"></i> 
+                  <span data-ng-bind="list.adPrice"> </span>
+                </span>
+            </a>
+         
+            
+       </div>
+       
+    </div>
+
+      <!-- <div flex="25" flex-md="25" flex-sm="25" flex-xs="25" layout="column" infinite-scroll='loadMore()' infinite-scroll-distance="{{scrollDist}}">
+          <md-card data-ng-repeat="list in mainListData">
+           
+           <md-card-content>
+             <a class="modal-title" href="/list/{{list._id}}" title="" data-gallery="">
+                <img data-ng-src="{{list.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+                 <label data-ng-bind="list.adTitle"></label>
+                  <br>
+                  <span class="text-danger">Price: 
+                    <i class="fa fa-rupee"></i> 
+                    <span data-ng-bind="list.adPrice"> </span>
+                  </span>
+              </a>
+           </md-card-content>
+          </md-card>
+      </div> -->
+     
+    
+      </md-content>
+  </md-card>
+</div>
+

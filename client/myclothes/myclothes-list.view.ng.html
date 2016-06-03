@@ -1,0 +1,80 @@
+<div class="myclothes-item" layout="column">
+  <md-card>
+    <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="row"> 
+        
+      <md-progress-circular md-mode="{{spinnerValue}}" class="ajax-loader md-warn md-hue-3"></md-progress-circular>
+     
+     <div class="masonry">
+        <div class="masonaryItem" data-ng-repeat="item in myClothesData">
+          <md-menu md-position-mode="target target">
+                          <img data-ng-src="{{item.adPhoto}}" width="100%" height="100%" alt="img" class="img-responsive" ng-click="$mdOpenMenu($event)">
+                                 <md-menu-content width="3">
+                                   <md-menu-item>
+                                     <md-button aria-label="Open View details" ng-click="showClothDetails(item)"> 
+                                      <i class="fa fa-eye">
+                                        <span md-menu-align-target> View </span> 
+                                      </i>
+                                    </md-button>
+                                   </md-menu-item>
+                                   <md-menu-item>
+                                     <md-button aria-label="Open Edit details" ng-click="editClothDetails(item)"> 
+                                      <i class="fa fa-pencil">
+                                        <span md-menu-align-target> Edit </span> 
+                                      </i>
+                                    </md-button>
+                                   </md-menu-item>
+                                   <md-menu-item>
+                                     <md-button aria-label="Remove details" ng-click="removeClothDetails(item)"> 
+                                      <i class="fa fa-trash-o">
+                                        <span md-menu-align-target> Remove </span> 
+                                      </i>
+                                    </md-button>
+                                   </md-menu-item>
+                                 </md-menu-content>
+                               </md-menu>
+        </div>
+        
+     </div>
+
+
+        <uib-pagination boundary-links="true" total-items="totalClothes.count" ng-model="page" class="pagination-sm" ng-change="pageChanged(page)" items-per-page="perPage" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </uib-pagination>
+        <p>Total number of things: {{totalClothes.count}}</p>
+      </md-content>
+    </md-card>
+  
+</div>       
+
+<!--       <div class="row">
+         <ul class="item-unstyled">
+           <li dir-paginate="item in myClothesData | itemsPerPage: perPage" total-items="totalClothes.count" current-page='page'>
+
+
+            <div class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
+              <div class="panel panel-default">
+                <div class="mycloth-container">
+                    <div class="btn-group pull-right mycloth-caret" uib-dropdown>
+                         <button type="button" class="btn btn-default btn-xs" uib-dropdown-toggle>
+                           <span class="caret"></span>
+                         </button>
+                         <ul uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                           <li role="menuitem"><a href="/myclothes/item)">View</a></li>
+                           <li class="divider"></li>
+                           <li role="menuitem"><a href="#"><i class="fa fa-pencil">  Edit </i></a></li>
+                           <li role="menuitem"><a href="#" data-ng-click="showConfirm(item)"><i class="fa fa-trash-o"> Remove</i></a></li>
+                         </ul>
+                    </div>
+                    <a class="modal-title" href="/myclothes/item)" title="" data-gallery="">
+                    <img data-ng-src="{{item.adPhoto}}" width="100%" height="100%" alt="" class="img-responsive">
+                  </a>
+                </div>
+                <div class="panel-footer">
+                  <h3 class="panel-title" data-ng-bind="item.adTitle"></h3>
+                </div>
+            </div>
+          </div>   
+           </li>
+         </ul>
+         <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)" class="col-md-12"></dir-pagination-controls> 
+       </div> -->
+    

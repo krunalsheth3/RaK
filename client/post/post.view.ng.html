@@ -1,0 +1,253 @@
+<div class="post-item" data-ng-controller="PostCtrl"  layout="column">
+  <md-card>
+    <md-tabs  md-stretch-tabs="always" md-dynamic-height="" md-border-bottom="" md-selected="selectedIndex">
+     <md-tab label="Ad Info" data-ng-disabled="true">
+       <md-card-content layout-padding>
+        <form role="form" id="postContact" name="postContact" data-ng-submit="postNextTab()">
+        	<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+        		<md-button type="button" class="md-warn md-raised" id="inputUploadImage" name="inputUploadImage" data-ng-click="uploadImage()">
+                 <h4>
+                   <i class="fa fa-picture-o" aria-hidden="true"></i>
+                      Select Photo
+                 </h4> 
+               </md-button>        		
+        	   <md-subheader class="md-primary"> OR </md-subheader>
+        	   <md-button class="md-warn md-raised" id="inputClickImage" name="inputClickImage" data-ng-click="clickImage()">
+	                <h4>
+	               	<i class="fa fa-camera" aria-hidden="true"></i>
+	          		 Take Photo
+	                </h4>
+                </md-button>
+        	</section>
+          
+	         <md-input-container class="md-block" flex-gt-sm>
+	           <input type="file" id="fileInput" class="hidden">
+	           <img src="" id="preview" class="img-responsive holder " alt="Image">
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm>
+	            <label for="inputPostTitle">Ad title
+	              <span class="required_notation">*</span>
+	            </label>
+	            <input md-maxlength="64" type="text" name="adTitle" id="inputPostTitle" class="form-control" data-ng-model="adObject.adTitle" uib-popover="Others will search your entry with this title"  popover-trigger="focus" required>
+	          </md-input-container>
+
+          	<md-input-container  class="md-block" flex-gt-sm>
+              <label> Select Category </label>
+          	    <md-select id="inputPostCategory" name="adCategory" data-ng-model="adObject.adCategory" required>
+          	    	<md-option ng-value="item.type" ng-repeat="item in category">{{ item.type }}</md-option>  
+          	      </md-select>
+          	</md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm>
+	           <label for="inputPrice">Price
+	              <span class="required_notation">* : </span>
+                <i class="fa fa-rupee" aria-hidden="true"></i>
+                
+	            </label>
+	            
+	             <input type="number" id="inputPrice" name="adPrice" class="form-control" data-ng-model="adObject.adPrice" required>
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm>
+	           <label for="inputDescription">Description (optional)</label>
+	             <textarea md-maxlength="128" name="adDescription" id="inputDescription" class="form-control" rows="3" data-ng-model="adObject.adDescription">
+	             </textarea>
+	          </md-input-container>           
+	          
+	          <md-input-container class="md-block" flex-gt-sm>
+	                <md-button type="submit" class="md-primary md-raised">Next</md-button>
+	          </md-input-container>
+        </form>
+      </md-card-content> 
+    </md-tab>
+    
+     <md-tab label="Contact Info" data-ng-disabled="true">
+       <md-card-content layout-padding>
+        <form role="form" id="postAdForm" name="postAdForm" data-ng-submit="postAd(adObject)">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label for="inputEmail">Email
+              <span class="required_notation">*</span>
+            </label>
+            <input type="email" id="inputEmail" name="adUserEmail" data-ng-model="adObject.adUserEmail" required/>
+           </md-input-container>
+          
+          <md-input-container class="md-block" flex-gt-sm>
+            <label for="inputPhone">Phone number * : +91 </label>
+            <input type="number" name="adUserPhone" id="inputPhone" data-ng-model="adObject.adUserPhone" required/>
+          </md-input-container>
+          
+          <md-input-container class="md-block" flex-gt-sm>
+                  <label for="getmyLocBtn">Your location
+                    <span class="required_notation">*</span>
+                  </label>             
+                  <br>
+                  <button disabler="'Fetching location '" ng-model="loading" type="button" id="getmyLocBtn" name="getmyLocBtn" class="btn btn-success" data-ng-click="getCurrentLocation()">
+                  <i class="fa fa-map-marker"></i> Get my location
+                  </button>
+                  <br>
+                    OR
+                  <br>
+                  <div id="searchfield-container" class="form-group"></div>
+                   <div id="map_canvas" class="angular-google-map-container form-group">
+                       <script type="text/ng-template" id="inputZip">
+                          <input type="text" class="form-control" id="adUserLoc" name="adUserLoc"
+                           placeholder="Enter a town, city, address or ZIP code" required />
+                      </script>
+                      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true"
+                       options="options">
+                          <ui-gmap-search-box parentDiv="'searchfield-container'" template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+                      </ui-gmap-google-map> 
+                  </div>
+          </md-input-container>
+          
+          
+          <div layout="row">
+            <md-input-container class="md-block" flex>
+              <md-button type="button" class="md-primary md-raised pull-left" data-ng-click="postNextTab()">Previous
+              </md-button>
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+              <md-button type="submit" class="md-primary md-raised pull-right">Finish
+              </md-button>
+            </md-input-container>
+          </div>
+        </form>
+      </md-card-content>
+    </md-tab>
+  </md-tabs>
+ </md-card>    
+</div>
+
+
+
+<!-- 
+<div class="container" data-ng-controller="PostCtrl">
+	 <form role="form" id="postAdForm" name="postAdForm" data-ng-submit="postAd(adObject)">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Ad info</h3>
+		  	</div>
+	  	<div class="panel-body">
+  		    <div class="row">
+  		       <div class="col-xs-6 .col-md-4 col-sm-3">
+  		          <md-button class="md-warn md-raised" id="inputClickImage" name="inputClickImage" data-ng-click="clickImage()">
+  		            <h4>
+  		              <i class="fa fa-camera" aria-hidden="true"></i>
+  		              Take Photo
+  		            </h4>
+  		          </md-button>
+  		          <br>
+  		          <label class="alert clearfix text-center"> OR </label>
+  		          <br>
+  		          <md-button type="button" class="md-warn md-raised" id="inputUploadImage" name="inputUploadImage" data-ng-click="uploadImage()">
+  		            <h4>
+  		              <i class="fa fa-picture-o" aria-hidden="true"></i>
+  		                 Select Photo
+  		            </h4> 
+  		          </md-button>
+  		        </div>
+  		        <input type="file" id="fileInput" class="hidden">
+  		        <div class="col-xs-6 col-sm-6 col-md-6  col-lg-5">
+  		            <img src="" id="preview" class="img-responsive holder " alt="Image">
+  		        </div>
+  		      </div>
+  		      
+  		        <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		            <label for="inputPostTitle">Ad title
+  		              <span class="required_notation">*</span>
+  		            </label>
+  		            <input type="text" name="adTitle" id="inputPostTitle" class="form-control" data-ng-model="adObject.adTitle" uib-popover="Others will search your entry with this title"  popover-trigger="focus" required>
+  		          </md-input-container>
+  		        </div>
+  		      
+  		        <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		          	<select id="inputPostCategory" name="adCategory" data-ng-model="adObject.adCategory" class="form-control" 
+  		          	        data-ng-options="clothes.type as clothes.type for clothes in category" required>
+  		          	        <option value="" disabled>Please select</option>
+  		          	</select>
+  		          </md-input-container>
+  		        </div>
+  		      
+  		        <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		           <label for="inputPrice">Price
+  		           		<span class="required_notation">*</span>
+  		            </label>
+  		            <md-icon md-font-icon="fa fa-rupee"></md-icon>
+  		             <input type="number" id="inputPrice" name="adPrice" class="form-control" data-ng-model="adObject.adPrice" required>
+  		          </md-input-container>
+  		        </div>
+  		        <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		           <label for="inputDescription">Description (optional)</label>
+  		             <textarea name="adDescription" id="inputDescription" class="form-control" rows="3" data-ng-model="adObject.adDescription">
+  		             </textarea>
+  		          </md-input-container>
+  		        </div>
+  		      
+  		    </div>
+  		</div>
+  		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Contact info</h3>
+		  	</div>
+	  	<div class="panel-body">
+  		     
+  		        <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		            <label for="inputEmail">Email
+  		              <span class="required_notation">*</span>
+  		            </label>
+  		            <input type="email" id="inputEmail" name="adUserEmail" data-ng-model="adObject.adUserEmail" 
+  		              required/>
+  		           </md-input-container>
+  		        </div>
+  		     
+  		         <div layout-gt-sm="row">
+  		           <md-input-container class="md-block" flex-gt-sm>
+  		            <label for="inputPhone">Phone number * : +91
+  		            </label>
+  		             <input type="number" name="adUserPhone" id="inputPhone" data-ng-model="adObject.adUserPhone" required/>
+  		            </md-input-container>
+  		         </div>
+  		     
+  		        <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		            <label for="getmyLocBtn">Your location
+  		              <span class="required_notation">*</span>
+  		            </label>             
+  		            <br>
+  		            <button disabler="'Fetching location '" ng-model="loading" type="button" id="getmyLocBtn" name="getmyLocBtn" class="btn btn-success" data-ng-click="getCurrentLocation()">
+  		            <i class="fa fa-map-marker"></i> Get my location
+  		            </button>
+  		            <br>
+  		            	OR
+  		            <br>
+  		            <div id="searchfield-container" class="form-group"></div>
+  		             <div id="map_canvas" class="angular-google-map-container form-group">
+  		                 <script type="text/ng-template" id="inputZip">
+  		                    <input type="text" class="form-control" id="adUserLoc" name="adUserLoc"
+  		                     placeholder="Enter a town, city, address or ZIP code" required />
+  		                </script>
+  		                <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true"
+  		                 options="options">
+  		                    <ui-gmap-search-box parentDiv="'searchfield-container'" template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+  		                </ui-gmap-google-map> 
+  		            </div>
+  		          </md-input-container>
+  		        </div>
+  		      
+  		      <div layout-gt-sm="row">
+  		          <md-input-container class="md-block" flex-gt-sm>
+  		            <button type="submit" class="btn btn-primary btn-lg">Post
+  		            </button>
+  		           </md-input-container>
+  		        </div>
+  			</div>
+		</div>
+  	</form>
+</div>
+ -->
